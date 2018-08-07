@@ -1,0 +1,17 @@
+{
+    "name": "krencl/wedos-api",
+    "description": "Wedos API library",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Krencl",
+            "email": "krencl@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0" : {
+            "Krencl" : "src"
+        }
+    },
+    "require": {}
+}
