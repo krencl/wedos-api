@@ -2,6 +2,9 @@
 
 namespace Krencl\WedosApi;
 
+use Krencl\WedosApi\Exception\ConfigurationFileBadFormatException;
+use Krencl\WedosApi\Exception\ConfigurationFileNotFoundException;
+
 class Configuration
 {
 	/**
@@ -74,5 +77,31 @@ class Configuration
 	public function getUrl(): string
 	{
 		return $this->url;
+	}
+
+	/**
+	 * @param string $filePath
+	 * @return Configuration
+	 * @throws ConfigurationFileBadFormatException
+	 * @throws ConfigurationFileNotFoundException
+	 */
+	public static function createFromFile(string $filePath): self
+	{
+		if (!file_exists($filePath)) {
+			throw new ConfigurationFileNotFoundException($filePath);
+		}
+
+		$content = file_get_contents($filePath);
+		$config = json_decode($content, true);
+
+		if ($config === null) {
+			throw new ConfigurationFileBadFormatException('Invalid JSON format of config file.');
+		}
+
+		if (!isset($config['user'], $config['password'], $config['testingMode'])) {
+			throw new ConfigurationFileBadFormatException('Missing one of parameter: user, password or testingMode');
+		}
+
+		return new self($config['user'], $config['password'], $config['testingMode']);
 	}
 }
