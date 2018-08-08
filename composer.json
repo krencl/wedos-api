@@ -13,5 +13,8 @@
             "Krencl" : "src"
         }
     },
-    "require": {}
+    "require": {
+        "ext-curl": "*",
+        "ext-json": "*"
+    }
 }
