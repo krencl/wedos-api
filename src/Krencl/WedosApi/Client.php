@@ -2,6 +2,10 @@
 
 namespace Krencl\WedosApi;
 
+use Krencl\WedosApi\Exception\ResultHTTPCodeException;
+use Krencl\WedosApi\Exception\ResultStatusCodeException;
+use Krencl\WedosApi\Constants\HTTPCode;
+
 class Client
 {
 	/**
@@ -9,6 +13,9 @@ class Client
 	 */
 	protected $configuration;
 
+	/**
+	 * @param Configuration $configuration
+	 */
 	public function __construct(Configuration $configuration)
 	{
 		$this->configuration = $configuration;
@@ -17,6 +24,8 @@ class Client
 	/**
 	 * @param Request $request
 	 * @return Response
+	 * @throws ResultHTTPCodeException
+	 * @throws ResultStatusCodeException
 	 */
 	public function sendRequest(Request $request): Response
 	{
@@ -41,7 +50,10 @@ class Client
 
 		curl_close($curl);
 
-		return new Response($result, $info);
+		$response = new Response($result, $info);
+		$this->checkResponse($response);
+
+		return $response;
 	}
 
 	/**
@@ -65,5 +77,21 @@ class Client
 		}
 
 		return $body;
+	}
+
+	/**
+	 * @param Response $response
+	 * @throws ResultHTTPCodeException
+	 * @throws ResultStatusCodeException
+	 */
+	protected function checkResponse(Response $response): void
+	{
+		if (!$response->isHttpCodeOk()) {
+			throw new ResultHTTPCodeException($response->getHttpCode());
+		}
+
+		if (!$response->isStatusCodeOk()) {
+			throw new ResultStatusCodeException($response->getStatusCode());
+		}
 	}
 }
