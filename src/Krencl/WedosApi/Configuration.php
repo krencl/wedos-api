@@ -72,6 +72,14 @@ class Configuration
 	}
 
 	/**
+	 * @param string $url
+	 */
+	public function setUrl(string $url): void
+	{
+		$this->url = $url;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getUrl(): string
@@ -102,6 +110,11 @@ class Configuration
 			throw new ConfigurationFileBadFormatException('Missing one of parameter: user, password or testingMode');
 		}
 
-		return new self($config['user'], $config['password'], $config['testingMode']);
+		$configuration = new self($config['user'], $config['password'], $config['testingMode']);
+		if (isset($config['url']) && $config['url'] !== null) {
+			$configuration->setUrl($config['url']);
+		}
+
+		return $configuration;
 	}
 }

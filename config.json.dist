@@ -1,5 +1,6 @@
 {
 	"user": null,
 	"password": null,
-	"testingMode": false
+	"testingMode": false,
+	"url": null
 }
