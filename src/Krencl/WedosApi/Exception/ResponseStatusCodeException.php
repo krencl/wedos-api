@@ -4,7 +4,7 @@ namespace Krencl\WedosApi\Exception;
 
 use Krencl\WedosApi\Constants\Status;
 
-class ResultStatusCodeException extends \Exception
+class ResponseStatusCodeException extends ResponseException
 {
 	public function __construct(int $statusCode, int $code = 0, \Throwable $previous = null)
 	{

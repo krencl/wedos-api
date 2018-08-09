@@ -2,7 +2,7 @@
 
 namespace Krencl\WedosApi\Exception;
 
-class ResultHTTPCodeException extends \Exception
+class ResponseHTTPCodeException extends ResponseException
 {
 	public function __construct(int $httpCode, int $code = 0, \Throwable $previous = null)
 	{
