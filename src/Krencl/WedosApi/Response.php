@@ -79,7 +79,7 @@ class Response
 	 */
 	public function isHttpCodeOk(): bool
 	{
-		return $this->getHttpCode() === HTTPCode::HTTP_OK;
+		return $this->httpCode === HTTPCode::HTTP_OK;
 	}
 
 	/**
@@ -95,7 +95,7 @@ class Response
 	 */
 	public function isStatusCodeOk(): bool
 	{
-		return $this->getStatusCode() < 2000;
+		return $this->statusCode < 2000;
 	}
 
 	/**
@@ -104,5 +104,29 @@ class Response
 	public function getResult(): array
 	{
 		return $this->result;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getData(): array
+	{
+		return $this->result['data'];
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getClTRID(): string
+	{
+		return $this->result['clTRID'];
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSvTRID(): string
+	{
+		return $this->result['svTRID'];
 	}
 }
