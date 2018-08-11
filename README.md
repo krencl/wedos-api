@@ -10,13 +10,13 @@ API client for communication with Wedos API.
 
 ## Configuration
 
-From file, in root path is sample file `config.json.dist`:
+From JSON file, in root path is sample file `config.json.dist`:
 ```php
 <?php
 
-use Krencl\WedosApi;
+use Krencl\WedosApi\Configuration;
 
-$configuration = WedosApi\Configuration::createFromFile(__DIR__ . '/config.json');
+$configuration = Configuration::createFromFile(__DIR__ . '/config.json');
 ```
 
 Or hardcoded:
@@ -24,32 +24,62 @@ Or hardcoded:
 ```php
 <?php
 
-use Krencl\WedosApi;
+use Krencl\WedosApi\Configuration;
 
-$configuration = new WedosApi\Configuration('user', 'password');
+$configuration = new Configuration('user', 'password');
 
 // optional
 $configuration->setTestingMode(true);
 $configuration->setUrl('https://...');
 ```
 
-## Sending request
+## Request
+
+Using built-in command:
 
 ```php
 <?php
 
-use Krencl\WedosApi;
+use Krencl\WedosApi\Command;
+use Krencl\WedosApi\Constants;
 
-$configuration = WedosApi\Configuration::createFromFile(__DIR__ . '/../config.json');
-$client = new WedosApi\Client($configuration);
+/** @var \Krencl\WedosApi\Request $command */
+$command = new Command\DomainsList(Constants\DomainStatus::ACTIVE);
+```
 
-$request = new WedosApi\Request('domains-list', [
-	'status' => WedosApi\Constants\DomainStatus::ACTIVE,
+Or create custom request:
+
+```php
+<?php
+
+use Krencl\WedosApi\Request;
+use Krencl\WedosApi\Constants;
+
+$request = new Request('domains-list', [
+	'status' => Constants\DomainStatus::ACTIVE,
 ]);
+```
+
+## Example
+
+```php
+<?php
+
+use Krencl\WedosApi\Client;
+use Krencl\WedosApi\Configuration;
+use Krencl\WedosApi\Command;
+use Krencl\WedosApi\Constants;
+use Krencl\WedosApi\Exception\ResponseException;
+
+$configuration = Configuration::createFromFile(__DIR__ . '/../config.json.dist');
+$client = new Client($configuration);
+
+$clTRID = 'myCustomId-1';
+$command = new Command\DomainsList(Constants\DomainStatus::ACTIVE, $clTRID);
 
 try {
-	$response = $client->sendRequest($request);
-} catch (WedosApi\Exception\ResponseException $e) {
+	$response = $client->sendRequest($command);
+} catch (ResponseException $e) {
 	echo (string) $e;
 	var_dump($e->getResponse()->getCurlResult());
 }
