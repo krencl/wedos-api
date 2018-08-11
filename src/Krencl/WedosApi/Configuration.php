@@ -52,7 +52,8 @@ class Configuration
 	 */
 	public function getAuth(): string
 	{
-		return sha1($this->user . sha1($this->password) . date('H'));
+		$date = new \DateTime('now', new \DateTimeZone('Europe/Prague'));
+		return sha1($this->user . sha1($this->password) . $date->format('H'));
 	}
 
 	/**
