@@ -9,6 +9,10 @@ class DomainsList extends Base
 	 */
 	protected $command = 'domains-list';
 
+	/**
+	 * @param string|null $domainStatus
+	 * @param null|string $clTRID
+	 */
 	public function __construct(string $domainStatus = null, ?string $clTRID = null)
 	{
 		parent::__construct($clTRID);
