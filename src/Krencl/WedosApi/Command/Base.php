@@ -13,4 +13,11 @@ abstract class Base extends Request
 	{
 		parent::__construct($this->command, [], $clTRID);
 	}
+
+	/**
+	 * @param array $data
+	 */
+	public function setFilteredData(array $data) {
+		$this->setData(array_filter($data));
+	}
 }

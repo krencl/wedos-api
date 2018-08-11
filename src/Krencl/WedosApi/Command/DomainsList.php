@@ -13,10 +13,8 @@ class DomainsList extends Base
 	{
 		parent::__construct($clTRID);
 
-		if ($domainStatus !== null) {
-			$this->setData([
-				'status' => $domainStatus,
-			]);
-		}
+		$this->setFilteredData([
+			'status' => $domainStatus,
+		]);
 	}
 }
