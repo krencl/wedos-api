@@ -79,7 +79,7 @@ class Response
 	 */
 	public function isHttpCodeOk(): bool
 	{
-		return $this->httpCode === HTTPCode::HTTP_OK;
+		return $this->httpCode === HTTPCode::OK;
 	}
 
 	/**
