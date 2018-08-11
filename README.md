@@ -4,7 +4,7 @@ API client for communication with Wedos API.
 
 # Installation
 
-`composer require krencl/wedos-api:dev-master`
+`composer require krencl/wedos-api`
 
 # Usage
 
