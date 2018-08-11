@@ -1,7 +1,7 @@
 {
     "name": "krencl/wedos-api",
     "description": "Wedos API library",
-	"version": "1.0",
+	"version": "1.0.1",
     "type": "library",
     "authors": [
         {
