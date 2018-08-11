@@ -111,7 +111,7 @@ class Response
 	 */
 	public function getData(): array
 	{
-		return $this->result['data'];
+		return isset($this->result['data']) ? $this->result['data'] : [];
 	}
 
 	/**
@@ -119,7 +119,7 @@ class Response
 	 */
 	public function getClTRID(): string
 	{
-		return $this->result['clTRID'];
+		return isset($this->result['clTRID']) ? $this->result['clTRID'] : null;
 	}
 
 	/**
