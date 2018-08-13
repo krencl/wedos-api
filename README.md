@@ -1,6 +1,6 @@
-# Wedos API (WAPI) client
+# Wedos API (WAPI) client for PHP
 
-API client for communication with Wedos API.
+PHP API client for communication with Wedos API.
 
 # Installation
 

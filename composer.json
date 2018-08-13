@@ -1,7 +1,7 @@
 {
     "name": "krencl/wedos-api",
-    "description": "Wedos API library",
-	"version": "1.0.1",
+    "description": "Wedos API client for PHP",
+	"version": "1.0.2",
     "type": "library",
     "authors": [
         {
