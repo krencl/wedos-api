@@ -79,6 +79,7 @@ $command = new Command\DomainsList(Constants\DomainStatus::ACTIVE, $clTRID);
 
 try {
 	$response = $client->sendRequest($command);
+	var_dump($response->getData());
 } catch (ResponseException $e) {
 	echo (string) $e;
 	var_dump($e->getResponse()->getCurlResult());
