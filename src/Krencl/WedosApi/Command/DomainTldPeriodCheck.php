@@ -10,8 +10,8 @@ class DomainTldPeriodCheck extends Base
 	protected $command = 'domain-tld-period-check';
 
 	/**
-	 * @param string      $tld
-	 * @param int         $period
+	 * @param string $tld
+	 * @param int $period
 	 * @param null|string $clTRID
 	 */
 	public function __construct(string $tld, int $period, ?string $clTRID = null)
